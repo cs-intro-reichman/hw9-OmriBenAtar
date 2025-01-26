@@ -81,10 +81,19 @@ public class LinkedList {
 	 *         if index is negative or greater than the list's size
 	 */
 	public void add(int index, MemoryBlock block) {
+		if (index < 0 || index > size) {
+			throw new IllegalArgumentException("index must be between 0 and size");
+		}
 		if(index == 0){
 			addFirst(block);
 		} else if(index == size){
 			addLast(block);
+		} else{
+			Node newNode = new Node(block);
+			Node prev = getNode(index - 1);
+			newNode.next = prev.next;
+			prev.next = newNode;
+			size++;
 		}
 	}
 
@@ -173,7 +182,10 @@ public class LinkedList {
 	 *        the node that will be removed from this list
 	 */
 	public void remove(Node node) {
-		for(int i=0; i<size; i++){
+		if (node == null) {
+			throw new IllegalArgumentException("ERROR NullPointerException!");
+		}
+		for(int i=0; i<=size; i++){
 			if(getNode(i).equals(node)){
 				remove(i);
 				break;
@@ -192,9 +204,9 @@ public class LinkedList {
 		if (index < 0 || index >= size) {
 			throw new IllegalArgumentException("Index must be between 0 and size.");
 		}
-		if (index == 0) {
+		if (index ==  0) {
 			first = first.next;
-		} else {
+		}else {
 			Node prev = getNode(index - 1);
 			prev.next = prev.next.next;
 			if (index == size - 1) {
@@ -213,13 +225,13 @@ public class LinkedList {
 	 *         if the given memory block is not in this list
 	 */
 	public void remove(MemoryBlock block) {
-		for(int i=0; i<size; i++){
+		for(int i=0; i<=size; i++){
 			if(getBlock(i).equals(block)){
 				remove(i);
 				return;
 			}
 		}
-		throw new IllegalArgumentException("The given memory block is not in this list."); 
+		throw new IllegalArgumentException("ERROR IllegalArgumentException: index must be between 0 and size"); 
 	}	
 
 	/**
