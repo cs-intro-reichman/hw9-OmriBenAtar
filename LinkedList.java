@@ -55,7 +55,7 @@ public class LinkedList {
 					"index must be between 0 and size");
 		}
 		Node node = first;
-		for (int i = 0; i < index; i++) {
+		for (int i = 0; i <= index; i++) {
 			node = node.next;
 		}
 		return node;
@@ -183,7 +183,7 @@ public class LinkedList {
 	 */
 	public void remove(Node node) {
 		if (node == null) {
-			throw new IllegalArgumentException("ERROR NullPointerException!");
+			throw new IllegalArgumentException("NullPointerException!");
 		}
 		for(int i=0; i<=size; i++){
 			if(getNode(i).equals(node)){
