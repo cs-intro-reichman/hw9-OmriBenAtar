@@ -65,6 +65,9 @@ public class MemorySpace {
 				allocatedList.addLast(newBlock);
 				freeList.getBlock(i).baseAddress += length;
 				freeList.getBlock(i).length -= length;
+				if (freeList.getBlock(i).length == 0) {
+					freeList.remove(i);
+				}
 				return newBlock.baseAddress;
 			}
 		}
@@ -80,7 +83,14 @@ public class MemorySpace {
 	 *            the starting address of the block to freeList
 	 */
 	public void free(int address) {
-		//// Write your code here
+		for (int i = 0; i < allocatedList.getSize(); i++) {
+			MemoryBlock block = allocatedList.getBlock(i);
+			if (block.baseAddress == address) {
+				freeList.addLast(block);
+				allocatedList.remove(i);
+				return;
+			}
+		}
 	}
 	
 	/**
