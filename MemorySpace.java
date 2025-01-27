@@ -63,7 +63,8 @@ public class MemorySpace {
 			if (block.length >= length) {
 				MemoryBlock newBlock = new MemoryBlock(block.baseAddress, length);
 				allocatedList.addLast(newBlock);
-				freeList.remove(i);
+				freeList.getBlock(i).baseAddress += length;
+				freeList.getBlock(i).length -= length;
 				return newBlock.baseAddress;
 			}
 		}
