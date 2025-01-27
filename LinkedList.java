@@ -201,11 +201,14 @@ public class LinkedList {
 	 *         if index is negative or greater than or equal to size
 	 */
 	public void remove(int index) {
-		if (index < 1 || index > size) {
+		if (index < 0 || index > size) {
 			throw new IllegalArgumentException("Index must be between 0 and size.");
 		}
-		if (index ==  1) {
+		if (index ==  0) {
 			first = first.next;
+			if (size == 1) {
+				last = null;
+			}
 		}else {
 			Node prev = getNode(index - 1);
 			prev.next = prev.next.next;
