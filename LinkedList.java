@@ -55,7 +55,7 @@ public class LinkedList {
 					"index must be between 0 and size");
 		}
 		Node node = first;
-		for (int i = 0; i <= index; i++) {
+		for (int i = 0; i < index; i++) {
 			node = node.next;
 		}
 		return node;
