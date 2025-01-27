@@ -248,13 +248,12 @@ public class LinkedList {
 	 * A textual representation of this list, for debugging.
 	 */
 	public String toString() {
-		if (size == 0) {
-			return "()";
+		String s = "";
+		Node current = first;
+		while (current != null) {
+			s = s + current.block + "";
+			current = current.next;
 		}
-		String result = "(";
-		for (Node node = first; node != null; node = node.next) {
-			result += node.block.toString() + " ";
-		}
-		return result + ")";
+		return s;
 	}
 }
