@@ -85,9 +85,8 @@ public class MemorySpace {
 	 *            the starting address of the block to freeList
 	 */
 	public void free(int address) {
-		if (freeList.getSize() == 0) {
-			throw new IllegalArgumentException("index must be between 0 and size");
-			
+		if (freeList == null) {
+			throw new IllegalArgumentException(" IllegalArgumentException: index must be between 0 and size");
 		}
 		for (int i = 0; i < allocatedList.getSize(); i++) {
 			MemoryBlock block = allocatedList.getBlock(i);
@@ -113,7 +112,6 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {
-		// Implement this method
-
+		
 	}
 }
