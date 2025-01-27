@@ -60,6 +60,8 @@ public class MemorySpace {
 	public int malloc(int length) {
 		Node current = freeList.getFirst();
 		while (current != null) {
+			System.out.println(freeList.toString());
+			System.out.println(allocatedList.toString());
 			MemoryBlock block = current.block;
 			if (block.length >= length) {
 				MemoryBlock newBlock = new MemoryBlock(block.baseAddress, length);
