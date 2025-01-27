@@ -57,7 +57,7 @@ public class MemorySpace {
 	 *        the length (in words) of the memory block that has to be allocated
 	 * @return the base address of the allocated block, or -1 if unable to allocate
 	 */
-	public int malloc(int length) {		
+	public int malloc(int length) {
 		for (int i = 0; i < freeList.getSize(); i++) {
 			MemoryBlock block = freeList.getBlock(i);
 			if (block.length >= length) {
@@ -107,7 +107,7 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {
-		/// TODO: Implement defrag test
-		//// Write your code here
+		// Implement this method
+
 	}
 }
