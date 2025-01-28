@@ -115,15 +115,31 @@ public class MemorySpace {
 		if (freeList.getSize() <= 1) {
 			return;
 		}	
+		
 		Node current = freeList.getFirst();
-		int length = 0;
 		while (current != null) {
 			MemoryBlock block = current.block;
-			length += block.length;
+			Node nextNode = current.next;
+			while (nextNode != null) {
+				MemoryBlock nextBlock = nextNode.block;
+				if (nextBlock.baseAddress == block.baseAddress + block.length) {
+					block.length += nextBlock.length;
+					nextBlock.length = 0;
+				}
+				nextNode = nextNode.next;
+			}
 			current = current.next;
 		}
-		freeList = new LinkedList();
-		//In this implementation, defrag merges all free blocks to address 0
-		freeList.addLast(new MemoryBlock(0, length));
+		//now to cleanup the freeList
+		LinkedList newList = new LinkedList();
+		current = freeList.getFirst();
+		while (current != null) {
+			MemoryBlock block = current.block;
+			if (block.length > 0) {
+				newList.addLast(new MemoryBlock(block.baseAddress, block.length));
+			}
+			current = current.next;
+		}
+		freeList = newList;
 	}
 }
