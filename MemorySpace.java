@@ -112,6 +112,8 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {	
+		System.out.println("Current free list: " + freeList);
+		System.out.println("Current allocated list: " + allocatedList);
 		if (freeList.getSize() <= 1) {
 			return;
 		}	
@@ -126,5 +128,6 @@ public class MemorySpace {
 		}
 		freeList = new LinkedList();
 		freeList.addLast(new MemoryBlock(baseAddress, length));
+		System.out.println("Free list after defrag: " + freeList);
 	}
 }
