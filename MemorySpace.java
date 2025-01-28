@@ -112,22 +112,18 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {	
-		System.out.println("Current free list: " + freeList);
-		System.out.println("Current allocated list: " + allocatedList);
 		if (freeList.getSize() <= 1) {
 			return;
 		}	
 		Node current = freeList.getFirst();
-		int baseAddress = 0;
 		int length = 0;
 		while (current != null) {
 			MemoryBlock block = current.block;
-			baseAddress += block.baseAddress;
 			length += block.length;
 			current = current.next;
 		}
 		freeList = new LinkedList();
-		freeList.addLast(new MemoryBlock(baseAddress, length));
-		System.out.println("Free list after defrag: " + freeList);
+		//In this implementation, defrag merges all free blocks to address 0
+		freeList.addLast(new MemoryBlock(0, length));
 	}
 }
