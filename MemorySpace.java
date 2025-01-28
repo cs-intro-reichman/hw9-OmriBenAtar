@@ -123,11 +123,13 @@ public class MemorySpace {
 		while (current != null) {
 			MemoryBlock block = current.block;
 			Node nextNode = current.next;
-			while (nextNode != null) {
+			while (nextNode != null && block.length > 0) {
 				MemoryBlock nextBlock = nextNode.block;
 				if (nextBlock.baseAddress == block.baseAddress + block.length) {
 					block.length += nextBlock.length;
 					nextBlock.length = 0;
+					//go back to the beginning and check all over again
+					current = freeList.getFirst();
 				}
 				nextNode = nextNode.next;
 			}
