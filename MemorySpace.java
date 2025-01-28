@@ -11,6 +11,7 @@ public class MemorySpace {
 	// A list of memory blocks that are presently free
 	private LinkedList freeList;
 
+	static int testNumber = 1;
 	/**
 	 * Constructs a new managed memory space of a given maximal size.
 	 * 
@@ -112,6 +113,8 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {	
+		System.out.println("Test : " + testNumber++);
+		System.out.println("Free list in the beginning: " + freeList);
 		if (freeList.getSize() <= 1) {
 			return;
 		}	
@@ -141,5 +144,6 @@ public class MemorySpace {
 			current = current.next;
 		}
 		freeList = newList;
+		System.out.println("Free list at the end: " + freeList);
 	}
 }
