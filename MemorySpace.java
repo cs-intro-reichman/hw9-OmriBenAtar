@@ -118,7 +118,7 @@ public class MemorySpace {
 		if (freeList.getSize() <= 1) {
 			return;
 		}	
-		
+		boolean found = false;
 		Node current = freeList.getFirst();
 		while (current != null) {
 			MemoryBlock block = current.block;
@@ -129,11 +129,15 @@ public class MemorySpace {
 					block.length += nextBlock.length;
 					nextBlock.length = 0;
 					//go back to the beginning and check all over again
+					found = true;
 					current = freeList.getFirst();
 				}
 				nextNode = nextNode.next;
 			}
-			current = current.next;
+			if (!found) {
+				current = current.next;
+			}
+			found = false;
 		}
 		//now to cleanup the freeList
 		LinkedList newList = new LinkedList();
